@@ -2,6 +2,7 @@ package com.tarequlrobin.journalapp.service;
 
 import com.tarequlrobin.journalapp.entity.User;
 import com.tarequlrobin.journalapp.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,7 +15,10 @@ import java.util.List;
 
 @Component
 @Service
+@Slf4j
 public class UserService {
+
+    //private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -32,6 +36,7 @@ public class UserService {
             userRepository.save(user);
             return true;
         }catch (Exception e) {
+            log.error(e.getMessage());
             return false;
         }
     }
