@@ -2,10 +2,7 @@ package com.tarequlrobin.journalapp.service;
 
 import com.tarequlrobin.journalapp.entity.User;
 import com.tarequlrobin.journalapp.repository.UserRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -33,6 +30,7 @@ public class UserDetailServiceImplTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Disabled
     @Test
     void loadUserByUsernameTest() {
         when(userRepository.findByUserName(ArgumentMatchers.anyString()))

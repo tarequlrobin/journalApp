@@ -1,7 +1,9 @@
 package com.tarequlrobin.journalapp.controller;
 
+import com.tarequlrobin.journalapp.api.response.WeatherResponse;
 import com.tarequlrobin.journalapp.entity.User;
 import com.tarequlrobin.journalapp.service.UserService;
+import com.tarequlrobin.journalapp.service.WeatherService;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private WeatherService  weatherService;
 
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
@@ -82,5 +87,16 @@ public class UserController {
         String userName = authentication.getName();
         userService.deleteByUserName(userName);
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @GetMapping("/greetings")
+    public ResponseEntity<?> greeting() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        WeatherResponse weatherResponse = weatherService.getWeather("Dhaka");
+        String greetings = "";
+        if (weatherResponse != null) {
+            greetings = "Weather of Entered City :"+weatherResponse.getCurrent().getTemperature();
+        }
+        return new ResponseEntity<>(authentication.getName() +", "+ greetings, HttpStatus.OK);
     }
 }

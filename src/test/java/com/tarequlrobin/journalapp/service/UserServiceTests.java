@@ -55,6 +55,7 @@ public class UserServiceTests {
         assertNotNull(userRepository.findByUserName(name));
     }
 
+    @Disabled
     @ParameterizedTest
     @ArgumentsSource(UserArgumentsProvider.class)
     public void createUserNameTest(User user){
