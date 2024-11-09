@@ -1,9 +1,11 @@
 package com.tarequlrobin.journalapp.controller;
 
+import com.tarequlrobin.journalapp.dto.UserDTO;
 import com.tarequlrobin.journalapp.entity.User;
 import com.tarequlrobin.journalapp.service.UserDetailServiceImpl;
 import com.tarequlrobin.journalapp.service.UserService;
 import com.tarequlrobin.journalapp.utils.JwtUtils;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/public")
 @Slf4j
+@Tag(name = "Public APIs", description = "Login/Signup")
 public class PublicController {
 
     @Autowired
@@ -45,8 +48,13 @@ public class PublicController {
     }
 
     @PostMapping("/signup")
-    public void signup(@RequestBody User user){
-        userService.saveNewUser(user);
+    public void signup(@RequestBody UserDTO userDTO){
+        User newUser = new User();
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setPassword(userDTO.getPassword());
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setSentimentAnalysis(userDTO.isSentimentAnalysis());
+        userService.saveNewUser(newUser);
     }
 
     @PostMapping("/login")

@@ -4,6 +4,7 @@ import com.tarequlrobin.journalapp.api.response.WeatherResponse;
 import com.tarequlrobin.journalapp.entity.User;
 import com.tarequlrobin.journalapp.service.UserService;
 import com.tarequlrobin.journalapp.service.WeatherService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
+@Tag(name = "User APIs", description = "Read, Update & Delete UserDTO")
 public class UserController {
 
     @Autowired
